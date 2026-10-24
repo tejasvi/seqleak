@@ -1,0 +1,53 @@
+# Leakage audit of this repository's dataset splits with seqleak audit (leak linter, rules v1.2.1).
+# The check fails when a task's verdict reaches FAIL_ON (default: fail). Reports and one-page cards are uploaded as a
+# workflow artifact, and a summary table is added to the job summary.
+#
+# Setup: copy this file to .github/workflows/leakage-audit.yml, and copy seqleak_ci.py and seqleak_card.py (the
+# folder templates/ci of the seqleak repository) to .github/seqleak/. Set DATA_ROOT to the folder whose task folders hold
+# train / dev / test files; for other layouts write a tasks file (see seqleak_ci.py) and use --tasks instead of --root.
+# For stricter supply-chain settings, pin each action to a commit sha instead of its major version.
+name: leakage-audit
+
+on:
+  pull_request:
+    paths: ['data/**', '.github/workflows/leakage-audit.yml', '.github/seqleak/**']
+  push:
+    branches: [main]
+    paths: ['data/**', '.github/workflows/leakage-audit.yml', '.github/seqleak/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DATA_ROOT: data                    # folder with one sub-folder per task (train.csv, dev.csv, test.csv, ...)
+  SEQLEAK: seqleak==0.4.1     # the release with linter rules v1.2.1; keep it pinned so verdicts stay comparable
+  FAIL_ON: fail                      # fail | warn | never
+  AUDIT_ARGS: ''                     # extra seqleak audit arguments, e.g. '--seq-col enhancer,promoter'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          lfs: true                  # dataset files tracked with Git LFS
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install seqleak
+        run: python -m pip install "$SEQLEAK"
+      - name: Install BLAST+ (optional; enables the homology check)
+        run: sudo apt-get update -q && sudo apt-get install -y -q ncbi-blast+
+      - name: Audit every task
+        run: >-
+          python .github/seqleak/seqleak_ci.py --root "$DATA_ROOT" --out leakage-audit
+          --fail-on "$FAIL_ON" --audit-args "$AUDIT_ARGS"
+      - name: Upload reports and cards
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: leakage-audit
+          path: leakage-audit/
+          if-no-files-found: warn

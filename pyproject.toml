@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seqleak"
+version = "0.4.1"
+description = "Gene-position baselines, position-held-fixed metrics and a leak linter for genomic language model benchmarks"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{name = "Tejasvi S. Tomar"}]
+dependencies = ["numpy>=1.22", "pandas>=1.4", "scipy>=1.8", "scikit-learn>=1.1", "pyarrow>=8"]
+
+[project.urls]
+Source = "https://github.com/tejasvi/seqleak"
+Archive = "https://doi.org/10.5281/zenodo.23605245"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+seqleak = "seqleak.cli:main"
+posbench = "seqleak.cli:main_posbench"
+
+[tool.setuptools]
+packages = ["seqleak", "seqleak.audit"]
+
+[tool.setuptools.package-data]
+seqleak = ["data/*.npz"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

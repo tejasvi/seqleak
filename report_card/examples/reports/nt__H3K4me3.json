@@ -1,0 +1,1042 @@
+{
+ "schema": "posbench.audit/1",
+ "tool": {
+  "name": "posbench",
+  "version": "0.4.0.dev2",
+  "argv": [
+   "posbench",
+   "audit",
+   "--data",
+   "nt__H3K4me3.parquet",
+   "--out",
+   "nt__H3K4me3.json",
+   "--task-name",
+   "nt__H3K4me3",
+   "--threads",
+   "1",
+   "--homology",
+   "blast",
+   "--homology-max-test",
+   "2000",
+   "--genome",
+   "sacCer3"
+  ]
+ },
+ "task": {
+  "name": "nt__H3K4me3",
+  "inputs": [
+   {
+    "path": "nt__H3K4me3.parquet",
+    "sha256": "2513b5a29f53a8e3c15828100520d041832ae55d08e070391f76fbc038d3e897",
+    "split": null,
+    "label": null
+   }
+  ],
+  "kind": "sequence",
+  "elements": [
+   "seq"
+  ],
+  "task_type": "classification",
+  "classes": [
+   0,
+   1
+  ],
+  "n": {
+   "train": 33119,
+   "dev": 0,
+   "test": 3680
+  },
+  "label_counts": {
+   "train": {
+    "0": 15475,
+    "1": 17644
+   },
+   "test": {
+    "0": 1720,
+    "1": 1960
+   }
+  },
+  "length": {
+   "min": 290,
+   "median": 500.0,
+   "max": 500
+  },
+  "metric": "mcc",
+  "has_coords": false,
+  "has_distance": false,
+  "mode": "standard",
+  "single_class_train": false
+ },
+ "settings": {
+  "rules": "v1.2",
+  "thresholds": {
+   "overlap.exact": {
+    "warn": 0.005,
+    "fail": 0.05,
+    "min_items": 3
+   },
+   "overlap.near": {
+    "warn": 0.01,
+    "fail": 0.1,
+    "near": 0.5,
+    "not_assessable_warn": 0.5,
+    "min_informative": 0.2
+   },
+   "overlap.windows": {
+    "warn": 0.01,
+    "fail": 0.25,
+    "collinear": 0.2
+   },
+   "overlap.pair": {
+    "warn": 0.01,
+    "fail": 0.25,
+    "near": 0.5
+   },
+   "overlap.homology": {
+    "warn": 0.05,
+    "fail": 0.25,
+    "homolog_id": 80.0,
+    "homolog_cov": 0.5,
+    "near_id": 95.0,
+    "near_cov": 0.8
+   },
+   "reference.copies": {
+    "warn": 0.01,
+    "fail": 0.05,
+    "near": 0.5
+   },
+   "shortcut.length": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "auroc": true,
+    "auroc_max_minority": 0.2,
+    "relative_fail": 0.5
+   },
+   "shortcut.ambiguous": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "auroc": true,
+    "auroc_max_minority": 0.2,
+    "relative_fail": 0.5
+   },
+   "shortcut.case": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "auroc": true,
+    "auroc_max_minority": 0.2,
+    "relative_fail": 0.5
+   },
+   "shortcut.lowinfo": {
+    "warn": 0.005,
+    "fail": 0.05,
+    "min_items": 3,
+    "min_acgt": 0.5
+   },
+   "shortcut.composition": {
+    "warn": 0.5,
+    "fail": null,
+    "auroc": true,
+    "auroc_max_minority": 0.2
+   },
+   "shortcut.kmer": {
+    "warn": 0.5,
+    "fail": null,
+    "auroc": true,
+    "auroc_max_minority": 0.2
+   },
+   "shortcut.position_motif": {
+    "warn": 0.4,
+    "fail": 0.7,
+    "auroc": true,
+    "auroc_max_minority": 0.2,
+    "auroc_requires_unmatched_site": true,
+    "relative_fail": 0.75
+   },
+   "construction.shuffle": {
+    "warn": 0.01,
+    "fail": 0.05,
+    "rule_acc": 0.7,
+    "within_warn": 0.05,
+    "max_identity": 0.6,
+    "fail_direction": "flip",
+    "chance_corrected": true
+   },
+   "construction.segment": {
+    "warn": 0.01,
+    "fail": 0.05,
+    "rule_acc": 0.7,
+    "within_warn": 0.05,
+    "min_identity": 0.4,
+    "fail_direction": "flip",
+    "chance_corrected": true
+   },
+   "construction.synthetic_negatives": {
+    "warn": 0.05,
+    "fail": 0.25,
+    "kappa": 0.4,
+    "min_pairs": 10,
+    "statistic": "test_share"
+   },
+   "construction.unmatched_site": {
+    "warn": 0.05,
+    "fail": 0.25,
+    "site_min": 0.95,
+    "multiclass_fail": false
+   },
+   "construction.library": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "min_df": 0.05,
+    "min_kmers": 5,
+    "pos_consistency": 0.8,
+    "max_items": 40000,
+    "min_group_share": 0.01
+   },
+   "construction.genome_membership": {
+    "warn": 0.2,
+    "fail": 0.5,
+    "auroc": true,
+    "auroc_max_minority": 0.2,
+    "k": 21,
+    "per_item": 32,
+    "member_min": 0.9,
+    "min_len": 30,
+    "align_cov": 0.95,
+    "align_ident": 0.95
+   },
+   "shortcut.anchored_motif": {
+    "warn": 0.4,
+    "fail": 0.7,
+    "auroc": true,
+    "auroc_max_minority": 0.2,
+    "anchor": 100,
+    "relative_fail": 0.75
+   },
+   "position.distance": {
+    "warn": 0.6,
+    "fail": 0.75
+   },
+   "position.row_zero": {
+    "warn": 0.6,
+    "fail": 0.75
+   },
+   "baseline.lookup": {
+    "min_shared": 2
+   }
+  },
+  "k": 21,
+  "sketch_scale": [
+   4
+  ],
+  "max_df": 64,
+  "seed": 0,
+  "n_boot": 1000,
+  "genome": [
+   "sacCer3"
+  ],
+  "genome_method": "kmer",
+  "folds": 5,
+  "homology": "blast",
+  "homology_max_test": 2000,
+  "fold_groups": "exact-duplicate and twin clusters of unique sequences"
+ },
+ "checks": {
+  "overlap.exact": {
+   "family": "overlap",
+   "title": "Exact or reverse-complement duplicates across splits",
+   "status": "PASS",
+   "statistic": "share of test items with an exact or reverse-complement copy in a fit split",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0010427861579207507
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.005,
+    "fail": 0.05,
+    "direction": ">="
+   },
+   "reason": "0 of 3680 test items have an exact or reverse-complement copy in train/dev",
+   "evidence": {
+    "test_in_train": 0.0,
+    "test_within_duplicates": 0.0,
+    "fit_groups_with_conflicting_labels": 0
+   },
+   "examples": [],
+   "seconds": 0.032
+  },
+  "overlap.near": {
+   "family": "overlap",
+   "title": "Near-duplicates (k-mer containment)",
+   "status": "FAIL",
+   "statistic": "share of test items with k-mer containment >= 0.5 in a fit split",
+   "value": 0.5701086956521739,
+   "ci": [
+    0.5540488317773259,
+    0.58602234277227
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.01,
+    "fail": 0.1,
+    "direction": ">="
+   },
+   "reason": "2098 of 3680 test items share >= 50% of their k-mers with one fit-split sequence",
+   "evidence": {
+    "per_element": {
+     "seq": {
+      "share_c50": 0.5701086956521739,
+      "share_c20": 0.9307065217391305,
+      "share_c80": 0.034782608695652174,
+      "not_assessable": 0.0,
+      "median_c": 0.5323160826177767,
+      "near_excluding_exact": 0.5701086956521739
+     }
+    },
+    "not_assessable": 0.0
+   },
+   "examples": [
+    {
+     "test_item": "YDR213W_UPC2_890049|1",
+     "test_label": 1,
+     "fit_item": "YDR213W_UPC2_889984|1",
+     "fit_label": 1,
+     "containment": 0.9,
+     "collinear": 0.9
+    },
+    {
+     "test_item": "YBL017C_PEP1_191478|1",
+     "test_label": 1,
+     "fit_item": "iYBL017C_191549|1",
+     "fit_label": 1,
+     "containment": 0.8991,
+     "collinear": 0.8991
+    },
+    {
+     "test_item": "iYGL045W_415880|0",
+     "test_label": 0,
+     "fit_item": "iYGL045W_415940|0",
+     "fit_label": 0,
+     "containment": 0.8966,
+     "collinear": 0.8966
+    },
+    {
+     "test_item": "YHR150W_PEX28_397546|1",
+     "test_label": 1,
+     "fit_item": "YHR150W_PEX28_397482|1",
+     "fit_label": 1,
+     "containment": 0.8889,
+     "collinear": 0.8889
+    },
+    {
+     "test_item": "iYMR021C_318411|1",
+     "test_label": 1,
+     "fit_item": "YMR021C_MAC1_318321|1",
+     "fit_label": 1,
+     "containment": 0.8819,
+     "collinear": 0.8819
+    }
+   ],
+   "seconds": 0.004
+  },
+  "overlap.windows": {
+   "family": "overlap",
+   "title": "Overlapping or shifted genome windows",
+   "status": "FAIL",
+   "statistic": "share of test items with a collinear shared run >= 0.2 of their k-mers (alignment-free)",
+   "value": 0.9301630434782608,
+   "ci": [
+    0.9214718819041903,
+    0.9379570689175549
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.01,
+    "fail": 0.25,
+    "direction": ">="
+   },
+   "reason": "3423 of 3680 test items share a collinear (overlapping or shifted) segment with a training/dev sequence; 0.930 of test items at a non-zero offset",
+   "evidence": {
+    "alignment_free": {
+     "share": 0.9301630434782608,
+     "shifted": 0.9301630434782608,
+     "median_overlap": 0.5476190476190477
+    }
+   },
+   "examples": [
+    {
+     "test_item": "YDR213W_UPC2_890049|1",
+     "fit_item": "YDR213W_UPC2_889984|1",
+     "overlap": 0.9,
+     "shift": -65,
+     "strand": "same"
+    },
+    {
+     "test_item": "YBL017C_PEP1_191478|1",
+     "fit_item": "iYBL017C_191549|1",
+     "overlap": 0.8991,
+     "shift": 71,
+     "strand": "same"
+    },
+    {
+     "test_item": "iYGL045W_415880|0",
+     "fit_item": "iYGL045W_415940|0",
+     "overlap": 0.8966,
+     "shift": 60,
+     "strand": "same"
+    },
+    {
+     "test_item": "YHR150W_PEX28_397546|1",
+     "fit_item": "YHR150W_PEX28_397482|1",
+     "overlap": 0.8889,
+     "shift": -64,
+     "strand": "same"
+    },
+    {
+     "test_item": "iYMR021C_318411|1",
+     "fit_item": "YMR021C_MAC1_318321|1",
+     "overlap": 0.8819,
+     "shift": -90,
+     "strand": "same"
+    }
+   ],
+   "seconds": 0.001
+  },
+  "overlap.pair": {
+   "family": "overlap",
+   "title": "Multi-element items copied from one training item",
+   "status": "SKIP",
+   "statistic": null,
+   "value": null,
+   "ci": null,
+   "n": null,
+   "threshold": null,
+   "reason": "single-element items",
+   "evidence": {},
+   "examples": [],
+   "seconds": 0.0
+  },
+  "overlap.homology": {
+   "family": "overlap",
+   "title": "Homology (alignment)",
+   "status": "FAIL",
+   "statistic": "share of test items with a fit-split hit of >= 80% identity over >= 50% of the query",
+   "value": 0.611,
+   "ci": [
+    0.5894403773402046,
+    0.6321340381566563
+   ],
+   "n": 2000,
+   "threshold": {
+    "warn": 0.05,
+    "fail": 0.25,
+    "direction": ">="
+   },
+   "reason": "1222 of 2000 sampled test items have a homologous training/dev sequence (BLASTN dc-megablast)",
+   "evidence": {
+    "tool": "BLASTN dc-megablast",
+    "n_subsample": 2000,
+    "near_duplicate_share": 0.0365,
+    "any_hit": 0.977,
+    "homolog_label_agreement": 0.9541734860883797
+   },
+   "examples": [],
+   "seconds": 9.815
+  },
+  "reference.copies": {
+   "family": "reference",
+   "title": "Copies of another benchmark's sequences",
+   "status": "SKIP",
+   "statistic": null,
+   "value": null,
+   "ci": null,
+   "n": null,
+   "threshold": null,
+   "reason": "no --reference given",
+   "evidence": {},
+   "examples": [],
+   "seconds": 0.0
+  },
+  "shortcut.length": {
+   "family": "shortcut",
+   "title": "Length shortcut",
+   "status": "PASS",
+   "statistic": "test MCC of the CV-selected one-feature rule",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "direction": ">="
+   },
+   "reason": "rule on length: test MCC 0.000 (CV on train 0.006); test AUROC 0.500",
+   "evidence": {
+    "selected_feature": "length",
+    "cv_mcc": 0.0058674736078912,
+    "test_auroc": 0.5,
+    "threshold": 310.0,
+    "direction": 1,
+    "features": {
+     "length": {
+      "cv": 0.0058674736078912,
+      "test": 0.0
+     }
+    },
+    "cv_auroc": 0.5000362857725711,
+    "status_from": "mcc"
+   },
+   "examples": [],
+   "seconds": 0.328
+  },
+  "shortcut.ambiguous": {
+   "family": "shortcut",
+   "title": "N / padding / ambiguity-code shortcut",
+   "status": "PASS",
+   "statistic": "test MCC of the CV-selected one-feature rule",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "direction": ">="
+   },
+   "reason": "feature constant on train",
+   "evidence": {
+    "features": {
+     "n_N": "constant",
+     "frac_N": "constant",
+     "lead_N": "constant",
+     "trail_N": "constant",
+     "maxrun_N": "constant",
+     "n_other": "constant"
+    }
+   },
+   "examples": [],
+   "seconds": 0.005
+  },
+  "shortcut.case": {
+   "family": "shortcut",
+   "title": "Lowercase (soft-masking) shortcut",
+   "status": "PASS",
+   "statistic": "test MCC of the CV-selected one-feature rule",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "direction": ">="
+   },
+   "reason": "feature constant on train",
+   "evidence": {
+    "features": {
+     "frac_lower": "constant"
+    }
+   },
+   "examples": [],
+   "seconds": 0.001
+  },
+  "shortcut.lowinfo": {
+   "family": "shortcut",
+   "title": "Low-information inputs (windows made mostly of N)",
+   "status": "PASS",
+   "statistic": "share of test items made mostly of N or other ambiguity codes",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0010427861579207507
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.005,
+    "fail": 0.05,
+    "direction": ">="
+   },
+   "reason": "0 of 3680 test items have less than 50% A/C/G/T (windows made mostly of N or other ambiguity codes); they are left out of the overlap checks",
+   "evidence": {
+    "min_acgt_fraction": 0.5,
+    "share_all_items": 0.0
+   },
+   "examples": [],
+   "seconds": 0.001
+  },
+  "shortcut.composition": {
+   "family": "shortcut",
+   "title": "GC / CpG / naturalness composition rule",
+   "status": "PASS",
+   "statistic": "test MCC of the CV-selected one-feature rule",
+   "value": 0.07112887679040693,
+   "ci": [
+    0.0375291287777269,
+    0.10219935232687456
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.5,
+    "fail": null,
+    "direction": ">="
+   },
+   "reason": "rule on cpg_dens: test MCC 0.071 (CV on train 0.089); test AUROC 0.558; composition can be real biology: report it as a baseline models must beat",
+   "evidence": {
+    "selected_feature": "cpg_dens",
+    "cv_mcc": 0.08914527468715032,
+    "test_auroc": 0.5583307130991931,
+    "threshold": 0.028056112224448898,
+    "direction": 1,
+    "features": {
+     "gc": {
+      "cv": 0.08229148743301513,
+      "test": 0.09238668137097301
+     },
+     "cpg_oe": {
+      "cv": 0.04363209909091152,
+      "test": 0.044946503958108903
+     },
+     "cpg_dens": {
+      "cv": 0.08914527468715032,
+      "test": 0.07112887679040693
+     },
+     "natural": {
+      "cv": 0.0715884891907854,
+      "test": 0.05265912568380826
+     }
+    },
+    "cv_auroc": 0.5611252306888821,
+    "status_from": "mcc"
+   },
+   "examples": [],
+   "seconds": 1.35
+  },
+  "shortcut.kmer": {
+   "family": "shortcut",
+   "title": "k-mer composition rule (order-3 Markov)",
+   "status": "PASS",
+   "statistic": "test MCC of the order-3 Markov Bayes rule",
+   "value": 0.2209095634037406,
+   "ci": [
+    0.19105456405852766,
+    0.24919792289961895
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.5,
+    "fail": null,
+    "direction": ">="
+   },
+   "reason": "order-3 Markov rule: test MCC 0.221 (CV 0.224); test AUROC 0.642; composition can be real biology",
+   "evidence": {
+    "cv_mcc": 0.22388444789691814,
+    "test_auroc": 0.6422671452301851,
+    "cv_auroc": 0.6510448434648436,
+    "status_from": "mcc"
+   },
+   "examples": [],
+   "seconds": 2.958
+  },
+  "shortcut.position_motif": {
+   "family": "shortcut",
+   "title": "Fixed-position motif table",
+   "status": "SKIP",
+   "statistic": null,
+   "value": null,
+   "ci": null,
+   "n": null,
+   "threshold": null,
+   "reason": "variable or long sequences",
+   "evidence": {},
+   "examples": [],
+   "seconds": 0.0
+  },
+  "construction.shuffle": {
+   "family": "construction",
+   "title": "Dinucleotide-shuffle negatives (composition twins)",
+   "status": "PASS",
+   "statistic": "share of test items with a composition twin (same dinucleotide counts) in a fit split",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0010427861579207507
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.01,
+    "fail": 0.05,
+    "direction": ">="
+   },
+   "reason": "no twin pairs",
+   "evidence": {
+    "n_pairs": 0,
+    "median_identity": null
+   },
+   "examples": [],
+   "seconds": 2.404
+  },
+  "construction.segment": {
+   "family": "construction",
+   "title": "Segment-substitution negatives (positional twins)",
+   "status": "PASS",
+   "statistic": "share of test items with a positional twin (segments kept in place) in a fit split",
+   "value": 0.0010869565217391304,
+   "ci": [
+    0.00042277481024490275,
+    0.002791657464723846
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.01,
+    "fail": 0.05,
+    "direction": ">="
+   },
+   "reason": "4 of 3680 test items have a twin in train/dev; their label is the partner's label flipped for 0.500 of them; 0.002 of all items are in twin pairs, 0.531 of pairs with different labels",
+   "evidence": {
+    "n_pairs": 32,
+    "p_same_label_fit_pairs": 0.4642857142857143,
+    "opposite_label_share_all_pairs": 0.53125,
+    "share_items_in_twin_pairs": 0.0016848283920758715,
+    "kappa": 0.004252993991428745,
+    "chance_agreement": 0.49786442039706613,
+    "twin_rule_accuracy_covered": 0.5,
+    "twin_rule_direction": "flip",
+    "label_determined_share_covered": 0.5,
+    "label_determined_share_ci": [
+     0.15003898774401986,
+     0.8499610122559802
+    ],
+    "label_relation_on_test": "flip",
+    "identity_quartiles": [
+     0.412,
+     0.444,
+     0.546
+    ],
+    "share_pairs_identity_ge_0.9": 0.03125
+   },
+   "examples": [
+    {
+     "test_item": "iYMRCdelta11_379077|1",
+     "test_label": 1,
+     "fit_item": "iYCRCdelta14_296202|0",
+     "fit_label": 0
+    },
+    {
+     "test_item": "YDL035C_GPR1_390591|0",
+     "test_label": 0,
+     "fit_item": "YML091C_RPM2_87121|0",
+     "fit_label": 0
+    },
+    {
+     "test_item": "iYKRCdelta12_517457|0",
+     "test_label": 0,
+     "fit_item": "itG(GCC)C_143110|0",
+     "fit_label": 0
+    },
+    {
+     "test_item": "YFR019W_FAB1_186129|0",
+     "test_label": 0,
+     "fit_item": "YEL007W_YEL007W_142825|1",
+     "fit_label": 1
+    }
+   ],
+   "seconds": 15.895
+  },
+  "construction.synthetic_negatives": {
+   "family": "construction",
+   "title": "Constructed negatives anywhere in the data (opposite-label twin pairs)",
+   "status": "PASS",
+   "statistic": "share of test items in twin pairs with different labels (pairs anywhere in the data)",
+   "value": 0.0,
+   "ci": [
+    0.0,
+    0.0010427861579207507
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.05,
+    "fail": 0.25,
+    "direction": ">="
+   },
+   "reason": "0 of 3680 test items are in twin pairs with different labels of a twin kind whose pairs disagree beyond chance (dinucleotide shuffles or segment substitutions of each other; 0.000 of all items); positional: 32 pairs, flip kappa 0.07",
+   "evidence": {
+    "kinds": {
+     "positional": {
+      "n_pairs": 32,
+      "flip_kappa": 0.06650051266547286,
+      "share_items_opposite": 0.0008967634990081253,
+      "counted": false
+     }
+    },
+    "share_all_items": 0.0
+   },
+   "examples": [],
+   "seconds": 0.008
+  },
+  "construction.unmatched_site": {
+   "family": "construction",
+   "title": "Negatives that lack the site defining the positives",
+   "status": "SKIP",
+   "statistic": null,
+   "value": null,
+   "ci": null,
+   "n": null,
+   "threshold": null,
+   "reason": "variable or long sequences",
+   "evidence": {},
+   "examples": [],
+   "seconds": 0.0
+  },
+  "construction.library": {
+   "family": "construction",
+   "title": "Pooled-library structure (shared constant segments predict the label)",
+   "status": "PASS",
+   "statistic": "test MCC (classification) or correlation (regression) of the library-group rule",
+   "value": 0.0,
+   "ci": null,
+   "n": 3680,
+   "threshold": {
+    "warn": 0.1,
+    "fail": 0.3,
+    "direction": ">="
+   },
+   "reason": "no constant segment shared by >= 5% of items at one offset",
+   "evidence": {
+    "n_backbones": 0,
+    "backbones": []
+   },
+   "examples": [],
+   "seconds": 44.837
+  },
+  "construction.genome_membership": {
+   "family": "construction",
+   "title": "Negatives absent from the reference genome (membership predicts the label)",
+   "status": "PASS",
+   "statistic": "test MCC of the train-fitted membership rule",
+   "value": 0.02257448796247238,
+   "ci": [
+    -0.008528360592161577,
+    0.05373957621182724
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.2,
+    "fail": 0.5,
+    "direction": ">="
+   },
+   "reason": "membership rule (fitted on train): test MCC 0.023 (CV 0.009); test AUROC 0.504; near-full-length members (membership >= 0.9) among test items: class 0 1.00, class 1 1.00",
+   "evidence": {
+    "method": "kmer",
+    "k": 21,
+    "per_item": 32,
+    "query_kmers": 1141755,
+    "reference_bases": 12157105,
+    "unplaced_items": 0,
+    "references": [
+     {
+      "file": "sacCer3.fa",
+      "bytes": 12400379
+     }
+    ],
+    "member_min": 0.9,
+    "shares": {
+     "train": {
+      "0": {
+       "n": 15475,
+       "members": 0.998578352180937,
+       "mean_membership": 0.998717689822294
+      },
+      "1": {
+       "n": 17644,
+       "members": 0.9982430287916573,
+       "mean_membership": 0.9985033864203129
+      }
+     },
+     "test": {
+      "0": {
+       "n": 1720,
+       "members": 0.9982558139534884,
+       "mean_membership": 0.9987281976744186
+      },
+      "1": {
+       "n": 1960,
+       "members": 0.9989795918367347,
+       "mean_membership": 0.998421556122449
+      }
+     }
+    },
+    "cv_mcc": 0.00865699147270321,
+    "test_auroc": 0.5036430647840532,
+    "cv_auroc": 0.5020481601840603,
+    "threshold": 0.984375,
+    "direction": -1,
+    "status_from": "mcc"
+   },
+   "examples": [],
+   "seconds": 8.483
+  },
+  "shortcut.anchored_motif": {
+   "family": "shortcut",
+   "title": "Motif table anchored at the item ends (variable-length items)",
+   "status": "PASS",
+   "statistic": "test MCC of the greedy <= 4-feature table anchored at the item ends (or site)",
+   "value": 0.03704571797883163,
+   "ci": [
+    0.006189952253996723,
+    0.06925090269743592
+   ],
+   "n": 3680,
+   "threshold": {
+    "warn": 0.4,
+    "fail": 0.7,
+    "direction": ">="
+   },
+   "reason": "table on T@end-53, A@start+4, A@start+20, AA@start+28: test MCC 0.037 (CV 0.016); test AUROC 0.522",
+   "evidence": {
+    "cv_mcc": 0.015812114428549576,
+    "test_auroc": 0.5224480897009967,
+    "cv_auroc": 0.5108437069318187,
+    "status_from": "mcc",
+    "features": [
+     {
+      "k": 1,
+      "pos": 147,
+      "kmer": "T",
+      "anchored": "end-53"
+     },
+     {
+      "k": 1,
+      "pos": 4,
+      "kmer": "A",
+      "anchored": "start+4"
+     },
+     {
+      "k": 1,
+      "pos": 20,
+      "kmer": "A",
+      "anchored": "start+20"
+     },
+     {
+      "k": 2,
+      "pos": 28,
+      "kmer": "AA",
+      "anchored": "start+28"
+     }
+    ],
+    "anchor": "item ends",
+    "window": 100
+   },
+   "examples": [],
+   "seconds": 21.819
+  },
+  "position.distance": {
+   "family": "position",
+   "title": "Position confound (distance fields)",
+   "status": "SKIP",
+   "statistic": null,
+   "value": null,
+   "ci": null,
+   "n": null,
+   "threshold": null,
+   "reason": "no --distance-cols given",
+   "evidence": {},
+   "examples": [],
+   "seconds": 0.0
+  },
+  "position.row_zero": {
+   "family": "position",
+   "title": "Position confound (gene-pair row zero)",
+   "status": "SKIP",
+   "statistic": null,
+   "value": null,
+   "ci": null,
+   "n": null,
+   "threshold": null,
+   "reason": "no --task-dir given",
+   "evidence": {},
+   "examples": [],
+   "seconds": 0.0
+  },
+  "baseline.lookup": {
+   "family": "baseline",
+   "title": "Nearest-training lookup baseline",
+   "status": "INFO",
+   "statistic": "mcc of the nearest-training lookup on test",
+   "value": 0.8231216298497681,
+   "ci": [
+    0.804298874831944,
+    0.8411863714905466
+   ],
+   "n": 3680,
+   "threshold": null,
+   "reason": "nearest-training lookup: mcc 0.823 [0.804, 0.841] (chance 0.000)",
+   "evidence": {
+    "metric": "mcc",
+    "chance": 0.0,
+    "n_with_partner": 3587,
+    "auroc": 0.9465138526340768,
+    "mcc": 0.8231216298497681,
+    "acc": 0.9119565217391304
+   },
+   "examples": [],
+   "seconds": 0.131
+  }
+ },
+ "lookup_baseline": {
+  "metric": "mcc",
+  "chance": 0.0,
+  "n_with_partner": 3587,
+  "auroc": 0.9465138526340768,
+  "mcc": 0.8231216298497681,
+  "acc": 0.9119565217391304,
+  "value": 0.8231216298497681,
+  "ci": [
+   0.804298874831944,
+   0.8411863714905466
+  ]
+ },
+ "best_rule": {
+  "family": "lookup",
+  "metric": "mcc",
+  "value": 0.8231216298497681,
+  "ci": [
+   0.804298874831944,
+   0.8411863714905466
+  ],
+  "chance": 0.0,
+  "selected_on": "test",
+  "all": {
+   "lookup": 0.8231,
+   "lookup_if_near_else:shortcut.kmer": 0.602,
+   "shortcut.kmer:markov3": 0.2209,
+   "twin:construction.segment_else:shortcut.kmer": 0.2208,
+   "shortcut.composition:cpg_dens": 0.0711,
+   "shortcut.anchored_motif:anchored_table": 0.037,
+   "construction.genome_membership:membership": 0.0226,
+   "twin:construction.segment_else_majority": 0.0176,
+   "shortcut.length:length": 0.0
+  }
+ },
+ "verdict": {
+  "status": "FAIL",
+  "fail": [
+   "overlap.near",
+   "overlap.windows",
+   "overlap.homology"
+  ],
+  "warn": [],
+  "summary": "leak checks failing: overlap.near, overlap.windows, overlap.homology"
+ },
+ "runtime": {
+  "seconds": 139.03,
+  "peak_rss_mb": 2225.5
+ }
+}

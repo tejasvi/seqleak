@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>seqleak audit: gb__human_enhancers_cohn</title><style>
+:root{color-scheme:light;--surface:#fcfcfb;--page:#f9f9f7;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;
+--grid:#e1e0d9;--base:#c3c2b7;--border:rgba(11,11,11,.10);--good:#0ca30c;--warning:#fab219;--critical:#d03b3b}
+*{box-sizing:border-box}
+html{background:var(--page)}
+body{margin:0 auto;max-width:210mm;padding:4mm 11mm 3mm;background:var(--surface);color:var(--ink);
+font:9.2pt/1.36 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1{font-size:17pt;line-height:1.15;margin:2px 0 3px;word-break:break-word}
+h2{font-size:10.5pt;margin:5px 0 3px;padding-bottom:2px;border-bottom:1px solid var(--grid)}
+.eyebrow{color:var(--ink2);font-size:8pt;letter-spacing:.06em;text-transform:uppercase}
+.sub{color:var(--ink2);font-size:8.5pt}
+.head{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
+.verdict{min-width:58mm;max-width:74mm;border:1px solid var(--border);border-left:6px solid var(--muted);border-radius:6px;
+padding:6px 9px;background:#fff}
+.verdict .word{font-size:19pt;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.1}
+.verdict .note{color:var(--ink2);font-size:8pt;margin-top:2px}
+.v-FAIL{border-left-color:var(--critical)}.v-WARN{border-left-color:var(--warning)}.v-PASS{border-left-color:var(--good)}
+.dot{display:inline-flex;align-items:center;justify-content:center;width:1.35em;height:1.35em;border-radius:50%;
+font-weight:700;font-size:.82em;line-height:1;color:#fff;background:var(--muted);flex:none}
+.verdict .dot{font-size:12pt}
+.d-FAIL{background:var(--critical)}.d-WARN{background:var(--warning);color:var(--ink)}.d-PASS{background:var(--good)}
+.d-SKIP{background:var(--muted)}.d-INFO{background:#fff;color:var(--ink2);box-shadow:inset 0 0 0 1.5px var(--ink2)}
+.chip{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:8.5pt;white-space:nowrap}
+.tiles{display:grid;grid-template-columns:.85fr 1fr 1.45fr 1fr;gap:6px;margin:8px 0 2px}
+.tile{border:1px solid var(--border);border-radius:6px;padding:5px 8px;background:#fff}
+.tile .lab{color:var(--ink2);font-size:7.5pt;letter-spacing:.05em;text-transform:uppercase}
+.tile .val{font-size:15pt;font-weight:600;line-height:1.2}
+.tile .val.small{font-size:10.5pt;line-height:1.5}
+.tile .s{color:var(--ink2);font-size:7.5pt;line-height:1.3}
+.finding{border-left:3px solid var(--muted);padding:1px 0 1px 8px;margin:2px 0;break-inside:avoid}
+.f-FAIL{border-left-color:var(--critical)}.f-WARN{border-left-color:var(--warning)}
+.finding .t{font-weight:600}.finding .v{font-variant-numeric:tabular-nums;color:var(--ink)}
+.finding .th{color:var(--ink2);font-size:8pt}
+.finding .r{color:var(--ink2);font-size:8pt}
+.finding .a{font-size:8pt}
+table{border-collapse:collapse;width:100%;font-size:8.1pt}
+th{color:var(--ink2);font-weight:600;text-align:left;border-bottom:1px solid var(--base);padding:2px 5px}
+td{border-bottom:1px solid var(--grid);padding:1px 5px;vertical-align:top;line-height:1.24}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td code{font-size:7.5pt;color:var(--ink2)}
+.muted{color:var(--muted)}
+td.task{min-width:42mm;overflow-wrap:anywhere}
+td.ids{font-size:7.6pt}
+.skip{font-size:7.8pt;color:var(--ink2);margin:4px 0 0}
+.foot{margin-top:4px;color:var(--ink2);font-size:7pt;line-height:1.26}
+.foot p{margin:2px 0}
+@page{size:A4;margin:0}
+@media print{html{background:none}body{max-width:none}}
+@media (forced-colors:active){.dot{border:1px solid CanvasText}}
+</style></head><body>
+<header class="head"><div>
+<div class="eyebrow">seqleak leakage audit &middot; report card</div>
+<h1>gb__human_enhancers_cohn</h1>
+<div class="sub">classification &middot; classes 0, 1 &middot; length 500-500 (median 500) &middot; elements seq &middot; coordinates no &middot; distance fields no</div>
+</div>
+<div class="verdict v-WARN"><div class="word"><span class="dot d-WARN" aria-hidden="true">!</span>WARN</div><div class="note">warnings: overlap.windows, overlap.homology</div></div>
+</header>
+<section class="tiles">
+<div class="tile"><div class="lab">Items</div><div class="val">6,948</div><div class="s">test items; train 20,843, dev 0</div></div>
+<div class="tile"><div class="lab">Nearest-training lookup</div><div class="val">0.501</div><div class="s">accuracy [0.489, 0.513]; chance 0.500. Label of the most similar training sequence</div></div>
+<div class="tile"><div class="lab">Best no-model rule</div><div class="val">0.681</div><div class="s">accuracy [0.671, 0.692]; chance 0.500. Chosen on test (an upper bound): label of the nearest training sequence when it is a near copy, otherwise the k-mer composition rule (order-3 Markov)</div></div>
+<div class="tile"><div class="lab">Checks</div><div class="val small"><span class="chip"><span class="dot d-WARN" aria-hidden="true">!</span>WARN</span>&nbsp;2 &nbsp;<span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span>&nbsp;15</div><div class="s">5 skipped (input lacks what they need); homology check run</div></div>
+</section>
+<h2>What the audit found</h2>
+<div class="finding f-WARN"><div><span class="chip"><span class="dot d-WARN" aria-hidden="true">!</span>WARN</span> <span class="t">Overlapping or shifted genome windows</span> <code class="muted">overlap.windows</code> &nbsp;<span class="v">0.022 [0.018, 0.025]</span> <span class="th">&nbsp;warn / fail 0.010 / 0.250</span> <span class="r">&mdash; 150 of 6948 test items share a collinear (overlapping or shifted) segment with a training/dev sequence; 0.022 of test items at a non-zero offset</span></div>
+</div>
+<div class="finding f-WARN"><div><span class="chip"><span class="dot d-WARN" aria-hidden="true">!</span>WARN</span> <span class="t">Homology (alignment)</span> <code class="muted">overlap.homology</code> &nbsp;<span class="v">0.114 [0.100, 0.128]</span> <span class="th">&nbsp;warn / fail 0.050 / 0.250</span> <span class="r">&mdash; 227 of 2000 sampled test items have a homologous training/dev sequence (BLASTN dc-megablast)</span></div>
+</div>
+<h2>Checks that passed</h2><table><thead><tr><th>check</th><th>status</th><th class="n">value [95% CI]</th><th class="n">warn / fail</th></tr></thead><tbody>
+<tr><td>Exact or reverse-complement duplicates across splits <code>overlap.exact</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.001]</td><td class="n">0.005 / 0.050</td></tr>
+<tr><td>Near-duplicates (k-mer containment) <code>overlap.near</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.007 [0.005, 0.009]</td><td class="n">0.010 / 0.100</td></tr>
+<tr><td>Length shortcut <code>shortcut.length</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.000]</td><td class="n">0.100 / 0.300</td></tr>
+<tr><td>N / padding / ambiguity-code shortcut <code>shortcut.ambiguous</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.000]</td><td class="n">0.100 / 0.300</td></tr>
+<tr><td>Lowercase (soft-masking) shortcut <code>shortcut.case</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.000]</td><td class="n">0.100 / 0.300</td></tr>
+<tr><td>Low-information inputs (windows made mostly of N) <code>shortcut.lowinfo</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.001]</td><td class="n">0.005 / 0.050</td></tr>
+<tr><td>GC / CpG / naturalness composition rule <code>shortcut.composition</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.339 [0.318, 0.362]</td><td class="n">0.500 / -</td></tr>
+<tr><td>k-mer composition rule (order-3 Markov) <code>shortcut.kmer</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.364 [0.343, 0.387]</td><td class="n">0.500 / -</td></tr>
+<tr><td>Fixed-position motif table <code>shortcut.position_motif</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.069 [0.046, 0.091]</td><td class="n">0.400 / 0.700</td></tr>
+<tr><td>Dinucleotide-shuffle negatives (composition twins) <code>construction.shuffle</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.001]</td><td class="n">0.010 / 0.050</td></tr>
+<tr><td>Segment-substitution negatives (positional twins) <code>construction.segment</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.081 [0.075, 0.087]</td><td class="n">0.010 / 0.050</td></tr>
+<tr><td>Constructed negatives anywhere in the data (opposite-label twin pairs) <code>construction.synthetic_negatives</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.001]</td><td class="n">0.050 / 0.250</td></tr>
+<tr><td>Negatives that lack the site defining the positives <code>construction.unmatched_site</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000</td><td class="n">0.050 / 0.250</td></tr>
+<tr><td>Pooled-library structure (shared constant segments predict the label) <code>construction.library</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000</td><td class="n">0.100 / 0.300</td></tr>
+<tr><td>Negatives absent from the reference genome (membership predicts the label) <code>construction.genome_membership</code></td><td><span class="chip"><span class="dot d-PASS" aria-hidden="true">✓</span>PASS</span></td><td class="n">0.000 [0.000, 0.000]</td><td class="n">0.200 / 0.500</td></tr>
+</tbody></table>
+<p class="skip"><span class="chip"><span class="dot d-SKIP" aria-hidden="true">–</span>SKIP</span> <code>overlap.pair</code> (single-element items); <code>reference.copies</code> (no --reference given); <code>shortcut.anchored_motif</code> (fixed-length items (see shortcut.position_motif)); <code>position.distance</code> (no --distance-cols given); <code>position.row_zero</code> (no --task-dir given).</p>
+<div class="foot">
+<p><b>How to read the verdict.</b> FAIL marks a leak at the level that manual audits of DNA benchmarks count as a defect, such as copies of test items in the training data, negatives constructed from positives, artefact or motif shortcuts, or position confounds. WARN marks the same signals below that level, or a composition baseline that a model must beat. It is common on tasks without a documented leak, so treat it as a reason to look closer. PASS means that no check reached its warning threshold, and SKIP that the input lacks what the check needs (coordinates, distance fields, an aligner, or items with several sequences). The linter reports only what its checks measure. It checks position only when distance fields are given, copies of other benchmarks only with --reference, membership in a reference genome only with --genome, and has no check for transductive arrangements; see &quot;Known limitations&quot; in the seqleak README.</p>
+<p>Rules: linter rules v1.2; posbench 0.4.0.dev2; report schema posbench.audit/1. Inputs: gb__human_enhancers_cohn.parquet (sha256 5a8f789142d6). Runtime 1223.35 s, peak memory 2206.8 MB. Command: <code>posbench audit --data gb__human_enhancers_cohn.parquet --out gb__human_enhancers_cohn.json --task-name gb__human_enhancers_cohn --threads 1 --metric acc --homology blast --homology-max-test 2000 --genome hg38</code>. Card: seqleak_card.py.</p>
+</div>
+</body></html>
